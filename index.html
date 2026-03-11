@@ -1,0 +1,1665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fuad Olajide — E-Commerce & Brand Design Expert</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg2: #111111;
+    --bg3: #181818;
+    --terracotta: #C4622D;
+    --terracotta-light: #E8855A;
+    --amber: #E8A24A;
+    --gold: #D4A017;
+    --white: #F5F0EB;
+    --off-white: #E8E0D6;
+    --muted: #888076;
+    --border: rgba(245,240,235,0.1);
+    --border-warm: rgba(196,98,45,0.25);
+    --forest: #4A6741;
+    --sage: #7A8C6E;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--white);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* ── CUSTOM CURSOR ── */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--terracotta);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s, width 0.2s, height 0.2s, background 0.2s;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(196,98,45,0.6);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: all 0.12s ease;
+  }
+  body:hover .cursor { opacity: 1; }
+  a:hover ~ .cursor, button:hover ~ .cursor { width: 20px; height: 20px; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    padding: 20px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    transition: background 0.3s;
+  }
+  nav.scrolled {
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px; letter-spacing: 2px;
+    color: var(--white);
+  }
+  .nav-logo span { color: var(--terracotta); }
+  .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+  .nav-links a {
+    font-size: 12px; font-weight: 500; letter-spacing: 1.5px;
+    color: var(--muted); text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cta {
+    background: var(--terracotta) !important; color: var(--white) !important;
+    padding: 10px 24px; 
+    font-size: 12px !important; letter-spacing: 2px !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--terracotta-light) !important; color: var(--white) !important; }
+
+  /* ── AVAILABLE TICKER (Eve Kayser style) ── */
+  .available-ticker {
+    position: fixed; top: 0; right: 60px;
+    width: 160px; height: 100%; pointer-events: none;
+    z-index: 99; overflow: hidden;
+    display: flex; align-items: flex-start;
+    padding-top: 72px;
+  }
+  .available-ticker-inner {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 10px; font-weight: 700; letter-spacing: 3px;
+    color: var(--terracotta); text-transform: uppercase;
+    white-space: nowrap; pointer-events: all;
+    animation: tickDown 12s linear infinite;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex; align-items: center; gap: 20px;
+  }
+  @keyframes tickDown {
+    0% { transform: translateY(-50%); }
+    100% { transform: translateY(0%); }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: auto;
+    display: flex; flex-direction: column;
+    justify-content: flex-end;
+    padding: 120px 60px 60px;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg-text {
+    position: absolute; top: 50%; left: -10px;
+    transform: translateY(-50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(120px, 16vw, 220px);
+    line-height: 0.85;
+    color: rgba(255,255,255,0.025);
+    pointer-events: none; user-select: none;
+    letter-spacing: -5px;
+    white-space: nowrap;
+  }
+  .hero-eyebrow {
+    font-size: 11px; font-weight: 600; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--terracotta);
+    margin-bottom: 16px; display: flex; align-items: center; gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block; width: 40px; height: 1px;
+    background: var(--terracotta);
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(56px, 7.5vw, 110px);
+    line-height: 0.9; letter-spacing: 2px;
+    color: var(--white);
+    margin-bottom: 28px;
+  }
+  .hero h1 .italic-line {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    color: var(--terracotta);
+    letter-spacing: 0;
+  }
+  .hero-bottom {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 40px;
+  }
+  .hero-sub {
+    font-size: 16px; line-height: 1.75;
+    color: var(--muted); max-width: 440px;
+  }
+  .hero-btns { display: flex; gap: 14px; flex-shrink: 0; }
+  .btn-primary {
+    background: var(--terracotta); color: var(--white);
+    padding: 16px 36px;
+    font-size: 12px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none; border: none; cursor: none;
+    transition: all 0.25s; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: var(--terracotta-light); transform: translateY(-2px); }
+  .btn-outline {
+    border: 1px solid var(--border-warm); color: var(--white);
+    padding: 15px 34px;
+    font-size: 12px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none; background: transparent; cursor: none;
+    transition: all 0.25s; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-outline:hover { border-color: var(--terracotta); background: rgba(196,98,45,0.1); }
+
+  .hero-stats {
+    display: flex; gap: 40px;
+    padding-top: 32px; margin-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+  .hero-stat span {
+    display: block;
+    font-family: 'Space Mono', monospace;
+    font-size: 24px; font-weight: 700;
+    color: var(--white);
+  }
+  .hero-stat p {
+    font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--muted); margin-top: 3px;
+  }
+
+  /* ── STATS TICKER ── */
+  .stats-ticker {
+    background: var(--terracotta); padding: 0;
+    overflow: hidden;
+  }
+  .ticker-track {
+    display: flex; gap: 0;
+    animation: ticker 30s linear infinite;
+    white-space: nowrap;
+  }
+  .ticker-item {
+    padding: 18px 48px;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px; color: rgba(255,255,255,0.8);
+    border-right: 1px solid rgba(255,255,255,0.2);
+    display: flex; align-items: center; gap: 12px;
+    flex-shrink: 0;
+  }
+  .ticker-item strong { color: white; }
+  .ticker-dot { color: rgba(255,255,255,0.5); font-size: 16px; }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ── SECTION COMMON ── */
+  section { padding: 100px 60px; }
+  .section-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--terracotta);
+    margin-bottom: 16px; display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::before { content: ''; display: block; width: 30px; height: 1px; background: var(--terracotta); }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 6vw, 100px);
+    line-height: 0.92; letter-spacing: 2px;
+    color: var(--white); margin-bottom: 24px;
+  }
+  .section-title .serif-em {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic; letter-spacing: 0;
+    color: var(--terracotta);
+  }
+  .section-sub {
+    font-size: 15px; color: var(--muted);
+    line-height: 1.75; max-width: 520px;
+    margin-bottom: 64px;
+  }
+
+  /* ── SERVICES ── */
+  .services { background: var(--bg); border-top: 1px solid var(--border); }
+  .services-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; }
+  .services-intro { position: sticky; top: 120px; }
+  /* 4×2 capsule grid */
+  .services-capsule-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 14px;
+  }
+  .service-capsule {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 22px 24px;
+    display: flex; flex-direction: column; gap: 10px;
+    transition: all 0.3s;
+    cursor: none;
+    position: relative; overflow: hidden;
+  }
+  .service-capsule::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--terracotta), var(--amber));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.35s ease;
+  }
+  .service-capsule:hover { background: #1c1c1c; border-color: var(--border-warm); transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.4); }
+  .service-capsule:hover::after { transform: scaleX(1); }
+  .service-capsule-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px; color: var(--terracotta); letter-spacing: 2px;
+  }
+  .service-capsule-icon { font-size: 26px; }
+  .service-capsule-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px; color: var(--white);
+    line-height: 1.2;
+  }
+  .service-capsule-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .service-capsule-arrow {
+    margin-top: auto; color: var(--terracotta);
+    font-size: 16px; opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .service-capsule:hover .service-capsule-arrow { opacity: 1; }
+
+  /* ── CASE STUDIES ── */
+  .case-studies { background: var(--bg2); }
+  .case-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 0; }
+  .case-card {
+    background: var(--bg3);
+    transition: all 0.3s;
+    display: flex; flex-direction: column;
+    position: relative; overflow: hidden;
+    cursor: none;
+  }
+  .case-card:hover { background: #1f1f1f; }
+  .case-card:hover .case-arrow-btn { opacity: 1; }
+  .case-header {
+    padding: 36px 32px 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .case-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px; color: var(--terracotta);
+    letter-spacing: 2px; margin-bottom: 12px;
+  }
+  .case-brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px; letter-spacing: 2px;
+    color: var(--white); margin-bottom: 4px;
+  }
+  .case-title-sub { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
+  .case-url {
+    font-size: 11px; color: var(--terracotta);
+    text-decoration: none; letter-spacing: 1px;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .case-url:hover { text-decoration: underline; }
+  .case-body { padding: 28px 32px; flex: 1; }
+  .case-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+  .case-metric {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    padding: 14px; text-align: center;
+  }
+  .case-metric-val {
+    font-family: 'Space Mono', monospace;
+    font-size: 20px; font-weight: 700; color: var(--amber);
+    display: block; margin-bottom: 4px;
+  }
+  .case-metric-lbl { font-size: 11px; color: var(--muted); letter-spacing: 0.5px; }
+  .case-desc { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
+  .case-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .case-tag {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    background: transparent; color: var(--terracotta);
+    border: 1px solid var(--border-warm);
+    padding: 4px 10px; text-transform: uppercase;
+  }
+  .case-footer {
+    padding: 18px 32px; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .case-proof { font-size: 11px; color: var(--forest); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+  .case-link {
+    font-size: 12px; color: var(--white); font-weight: 600; letter-spacing: 1px;
+    text-decoration: none; text-transform: uppercase;
+    display: flex; align-items: center; gap: 6px;
+    transition: color 0.2s;
+  }
+  .case-link:hover { color: var(--terracotta); }
+  .case-arrow-btn {
+    position: absolute; top: 20px; right: 20px;
+    width: 40px; height: 40px;
+    background: var(--terracotta);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; color: white;
+    opacity: 0; transition: opacity 0.3s;
+    text-decoration: none;
+  }
+
+  /* ── ECOM TRENDS ── */
+  .trends { background: var(--bg); border-top: 1px solid var(--border); }
+  .trends-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-top: 0; }
+  .trend-card {
+    background: var(--bg3);
+    padding: 36px 28px;
+    border-right: 1px solid var(--border);
+    transition: all 0.3s;
+    cursor: none;
+  }
+  .trend-card:last-child { border-right: none; }
+  .trend-card:hover { background: #1a1a1a; }
+  .trend-stat {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 60px; letter-spacing: 2px;
+    color: var(--white); margin-bottom: 4px; line-height: 1;
+  }
+  .trend-label { font-size: 12px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+  .trend-desc { font-size: 13px; color: rgba(245,240,235,0.5); line-height: 1.65; margin-bottom: 12px; }
+  .trend-icon { font-size: 24px; margin-bottom: 14px; }
+  .trend-arrow { color: var(--terracotta); font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+
+  /* ── SALES PROOF ── */
+  .sales-proof { background: var(--bg2); }
+  .proof-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-bottom: 2px; }
+  .proof-card {
+    background: var(--bg3);
+    padding: 40px 32px;
+    border-right: 1px solid var(--border);
+    transition: all 0.3s;
+    text-align: left;
+    cursor: none;
+  }
+  .proof-card:hover { background: #1d1d1d; }
+  .proof-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 52px; letter-spacing: 2px;
+    color: var(--terracotta); display: block; margin-bottom: 6px; line-height: 1;
+  }
+  .proof-label { font-size: 12px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+
+  .funnel-diagram {
+    background: var(--bg3); border-top: 1px solid var(--border);
+    padding: 60px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+  }
+  .funnel-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px; color: var(--white); margin-bottom: 8px; font-style: italic;
+  }
+  .funnel-sub { font-size: 14px; color: var(--muted); margin-bottom: 32px; line-height: 1.7; }
+  .funnel-steps { display: flex; flex-direction: column; gap: 4px; }
+  .funnel-step {
+    padding: 14px 20px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .f1 { background: rgba(232,162,74,0.2); }
+  .f2 { background: rgba(232,162,74,0.15); }
+  .f3 { background: rgba(232,162,74,0.1); }
+  .f4 { background: rgba(196,98,45,0.15); }
+  .f5 { background: rgba(196,98,45,0.25); }
+  .funnel-step-name { font-size: 13px; color: var(--white); font-weight: 500; }
+  .funnel-step-rate { font-family: 'Space Mono', monospace; font-size: 13px; color: var(--amber); }
+  .funnel-results { display: flex; flex-direction: column; gap: 12px; }
+  .funnel-result {
+    background: rgba(255,255,255,0.04); padding: 20px;
+    border-left: 2px solid var(--terracotta);
+  }
+  .funnel-result-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 24px; font-weight: 700; color: var(--amber);
+  }
+  .funnel-result-label { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  /* ── REVIEWS ── */
+  .reviews { background: var(--bg); border-top: 1px solid var(--border); }
+  .reviews-top {
+    display: grid; grid-template-columns: 1fr 2fr; gap: 80px;
+    align-items: start; margin-bottom: 60px;
+  }
+  .rating-big {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 120px; line-height: 0.9; color: var(--white); letter-spacing: 2px;
+  }
+  .rating-stars { color: var(--amber); font-size: 20px; margin: 10px 0; }
+  .rating-count-label { font-size: 12px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+  .rating-breakdown { margin-top: 24px; }
+  .rating-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  .rating-row span { font-size: 12px; color: var(--muted); width: 28px; text-align: right; }
+  .rating-bar { flex: 1; height: 4px; background: rgba(255,255,255,0.08); overflow: hidden; }
+  .rating-fill { height: 100%; background: var(--terracotta); }
+  .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .review-card {
+    background: var(--bg3);
+    padding: 36px 32px;
+    position: relative;
+    border-right: 1px solid var(--border);
+    transition: all 0.3s;
+    cursor: none;
+  }
+  .review-card:hover { background: #1a1a1a; }
+  .review-card::before {
+    content: '"';
+    position: absolute; top: 16px; right: 24px;
+    font-family: 'DM Serif Display', serif;
+    font-size: 100px; line-height: 1;
+    color: rgba(196,98,45,0.08);
+  }
+  .review-stars { color: var(--amber); font-size: 14px; margin-bottom: 18px; letter-spacing: 2px; }
+  .review-text { font-size: 14px; color: var(--off-white); line-height: 1.75; margin-bottom: 24px; font-style: italic; }
+  .reviewer { display: flex; align-items: center; gap: 12px; }
+  .reviewer-avatar {
+    width: 40px; height: 40px;
+    background: var(--terracotta);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; color: white; font-size: 14px;
+  }
+  .reviewer-name { font-weight: 700; font-size: 13px; color: var(--white); }
+  .reviewer-title { font-size: 11px; color: var(--muted); letter-spacing: 0.5px; }
+
+  /* ── FREE TRYOUT ── */
+  .free-tryout {
+    background: var(--terracotta);
+    color: white; position: relative; overflow: hidden;
+  }
+  .free-tryout .section-label { color: rgba(255,255,255,0.6); }
+  .free-tryout .section-label::before { background: rgba(255,255,255,0.4); }
+  .free-tryout .section-title { color: white; }
+  .free-tryout .section-sub { color: rgba(255,255,255,0.75); }
+  .tryout-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .tryout-card {
+    background: rgba(0,0,0,0.15);
+    padding: 40px 36px;
+    transition: all 0.3s; position: relative;
+    cursor: none;
+  }
+  .tryout-card:hover { background: rgba(0,0,0,0.25); }
+  .tryout-badge {
+    display: inline-block;
+    background: var(--amber); color: #1a0a04;
+    font-size: 10px; font-weight: 700; letter-spacing: 2px;
+    padding: 5px 14px; text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .tryout-icon { font-size: 36px; margin-bottom: 16px; }
+  .tryout-card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px; letter-spacing: 2px; margin-bottom: 12px;
+  }
+  .tryout-card p { font-size: 14px; opacity: 0.85; line-height: 1.65; margin-bottom: 24px; }
+  .tryout-includes { list-style: none; margin-bottom: 28px; }
+  .tryout-includes li {
+    font-size: 13px; opacity: 0.9;
+    padding: 6px 0; display: flex; align-items: center; gap: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .tryout-includes li::before { content: '→'; color: rgba(255,255,255,0.6); font-weight: 700; }
+  .btn-white {
+    background: white; color: var(--terracotta);
+    padding: 14px 32px;
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+    transition: all 0.25s; cursor: none;
+  }
+  .btn-white:hover { background: var(--off-white); }
+
+  /* ── CERTIFICATIONS ── */
+  .certifications { background: var(--bg2); border-top: 1px solid var(--border); }
+  .certs-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; }
+  .cert-card {
+    background: var(--bg3);
+    padding: 32px 20px 28px; text-align: center;
+    transition: all 0.3s; border-right: 1px solid var(--border);
+    cursor: none; display: flex; flex-direction: column; align-items: center; gap: 10px;
+  }
+  .cert-card:hover { background: #1d1d1d; }
+  .cert-logo {
+    width: 56px; height: 56px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: center;
+    filter: grayscale(0.4) brightness(0.95);
+    transition: filter 0.3s;
+  }
+  .cert-card:hover .cert-logo { filter: grayscale(0) brightness(1.1); }
+  .cert-logo img { width: 100%; height: 100%; object-fit: contain; }
+  .cert-name { font-weight: 700; font-size: 13px; color: var(--white); letter-spacing: 0.5px; }
+  .cert-type { font-size: 11px; color: var(--muted); }
+  .cert-badge {
+    display: inline-block;
+    background: transparent; color: var(--terracotta);
+    border: 1px solid var(--border-warm);
+    font-size: 10px; font-weight: 700; letter-spacing: 2px;
+    padding: 4px 10px; text-transform: uppercase;
+  }
+
+  /* ── AI TOOLS ── */
+  .ai-tools { background: var(--bg); padding: 100px 60px; border-top: 1px solid var(--border); }
+  .ai-tools-track-wrap { overflow: hidden; position: relative; margin-top: 0; }
+  .ai-tools-track-wrap::before,
+  .ai-tools-track-wrap::after {
+    content: ''; position: absolute; top: 0; bottom: 0; width: 100px; z-index: 2;
+    pointer-events: none;
+  }
+  .ai-tools-track-wrap::before { left: 0; background: linear-gradient(90deg, var(--bg), transparent); }
+  .ai-tools-track-wrap::after { right: 0; background: linear-gradient(-90deg, var(--bg), transparent); }
+  .ai-tools-track {
+    display: flex; gap: 2px;
+    animation: aiSlide 28s linear infinite;
+    padding: 2px 0;
+  }
+  @keyframes aiSlide {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .ai-tool-card {
+    flex-shrink: 0;
+    background: var(--bg3);
+    border-right: 1px solid var(--border);
+    padding: 28px 20px;
+    text-align: center; width: 150px;
+    transition: all 0.3s;
+    cursor: none;
+  }
+  .ai-tool-card:hover {
+    background: #1d1d1d;
+    border-color: var(--border-warm);
+  }
+  .ai-tool-logo {
+    width: 56px; height: 56px; margin: 0 auto 12px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 12px; overflow: hidden;
+    transition: transform 0.3s;
+  }
+  .ai-tool-card:hover .ai-tool-logo { transform: scale(1.1); }
+  .ai-tool-logo img { width: 100%; height: 100%; object-fit: contain; padding: 4px; }
+  .ai-tool-name { font-size: 12px; font-weight: 700; color: var(--white); margin-bottom: 4px; letter-spacing: 0.5px; }
+  .ai-tool-use { font-size: 10px; color: var(--muted); line-height: 1.5; }
+  .ai-hint { text-align: center; margin-top: 24px; font-size: 11px; color: rgba(245,240,235,0.3); letter-spacing: 1px; }
+
+  /* ── CONTACT ── */
+  .contact { background: var(--bg2); border-top: 1px solid var(--border); }
+  .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .contact-info { display: flex; flex-direction: column; gap: 2px; }
+  .contact-item {
+    background: var(--bg3);
+    border-bottom: 1px solid var(--border);
+    padding: 24px;
+    display: flex; align-items: center; gap: 20px;
+    transition: all 0.3s;
+    cursor: none;
+  }
+  .contact-item:hover { background: #1d1d1d; }
+  .contact-icon { font-size: 24px; flex-shrink: 0; }
+  .contact-detail-label { font-size: 10px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
+  .contact-detail-val { font-size: 15px; font-weight: 600; color: var(--white); }
+  .contact-links { margin-top: 2px; display: flex; flex-direction: column; gap: 2px; }
+  .contact-links a {
+    background: var(--terracotta); color: white;
+    padding: 16px 28px;
+    font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    text-decoration: none; text-align: center;
+    display: block; transition: background 0.2s;
+    cursor: none;
+  }
+  .contact-links a:hover { background: var(--terracotta-light); }
+  .contact-links a.secondary {
+    background: transparent; color: var(--white);
+    border: 1px solid var(--border-warm);
+  }
+  .contact-links a.secondary:hover { background: rgba(196,98,45,0.1); }
+  .contact-form {
+    background: var(--bg3);
+    padding: 48px;
+  }
+  .form-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px; letter-spacing: 2px;
+    color: var(--white); margin-bottom: 32px;
+  }
+  .form-group { margin-bottom: 20px; }
+  .form-group label {
+    display: block; font-size: 10px; color: var(--muted);
+    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px;
+  }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    padding: 14px 16px;
+    font-size: 14px; color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    outline: none; transition: border-color 0.2s;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--terracotta);
+  }
+  .form-group textarea { height: 100px; resize: vertical; }
+  .form-group select option { background: var(--bg); }
+  .form-submit {
+    background: var(--terracotta); color: white;
+    border: none; width: 100%; padding: 18px;
+    font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+    cursor: none; transition: background 0.2s;
+  }
+  .form-submit:hover { background: var(--terracotta-light); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #050505;
+    padding: 48px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid var(--border);
+  }
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px; letter-spacing: 3px; color: var(--white);
+  }
+  .footer-links { display: flex; gap: 36px; }
+  .footer-links a {
+    font-size: 11px; color: var(--muted); text-decoration: none;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--terracotta); }
+  .footer-copy { font-size: 11px; color: var(--muted); letter-spacing: 1px; }
+
+  /* ── WHATSAPP FLOAT ── */
+  .whatsapp-float {
+    position: fixed; bottom: 32px; right: 32px;
+    background: #25D366; color: white;
+    width: 52px; height: 52px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; text-decoration: none;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+    z-index: 999; transition: all 0.25s;
+    cursor: none;
+  }
+  .whatsapp-float:hover { transform: scale(1.08); }
+
+  /* ── FADE UP ── */
+  .fade-up {
+    opacity: 0; transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── HORIZONTAL RULE ── */
+  .section-rule { border: none; border-top: 1px solid var(--border); margin: 0 60px; }
+
+  /* ── ABOUT STRIP ── */
+  .about-strip {
+    background: var(--bg);
+    padding: 100px 60px;
+    border-top: 1px solid var(--border);
+  }
+  .about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .about-items { display: flex; flex-direction: column; gap: 0; }
+  .about-item {
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border);
+    display: grid; grid-template-columns: 32px 1fr;
+    gap: 24px; align-items: start;
+    cursor: none; transition: all 0.3s;
+  }
+  .about-item:hover .about-item-text { color: var(--off-white); }
+  .about-item-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px; color: var(--terracotta);
+    padding-top: 2px; letter-spacing: 1px;
+  }
+  .about-item-text { font-size: 15px; color: var(--muted); line-height: 1.75; transition: color 0.3s; }
+  .about-item-text strong { color: var(--white); font-weight: 600; }
+
+  /* Hero image card (right side of about) */
+  .about-hero-card {
+    position: sticky; top: 120px;
+    background: var(--bg3);
+    padding: 40px;
+    border: 1px solid var(--border);
+  }
+  .about-card-avatar {
+    width: 80px; height: 80px;
+    background: var(--terracotta);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px; letter-spacing: 2px; color: white;
+    margin-bottom: 20px;
+  }
+  .about-card-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 40px; letter-spacing: 2px; color: var(--white);
+    line-height: 1; margin-bottom: 6px;
+  }
+  .about-card-title { font-size: 13px; color: var(--muted); margin-bottom: 24px; letter-spacing: 0.5px; }
+  .about-card-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; }
+  .badge {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    padding: 5px 10px; text-transform: uppercase;
+    border: 1px solid var(--border-warm); color: var(--terracotta);
+  }
+  .about-card-stars { color: var(--amber); letter-spacing: 3px; margin-bottom: 6px; }
+  .about-card-rating-text { font-size: 12px; color: var(--muted); margin-bottom: 20px; }
+  .about-card-metric {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    padding: 16px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .about-card-metric-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 24px; font-weight: 700; color: var(--amber);
+  }
+  .about-card-metric-label { font-size: 11px; color: var(--muted); letter-spacing: 0.5px; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    body { cursor: auto; }
+    .cursor, .cursor-ring, .available-ticker { display: none; }
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    section, .about-strip, .ai-tools { padding: 60px 24px; }
+    .hero { padding: 0 24px 60px; }
+    .hero h1 { font-size: 72px; }
+    .hero-bottom { flex-direction: column; align-items: flex-start; }
+    .hero-stats { gap: 24px; flex-wrap: wrap; }
+    .services-layout, .about-layout, .contact-layout { grid-template-columns: 1fr; gap: 40px; }
+    .services-capsule-grid { grid-template-columns: repeat(2, 1fr); }
+    .about-hero-card { position: static; }
+    .services-intro { position: static; }
+    .case-grid, .reviews-grid, .tryout-grid { grid-template-columns: 1fr; }
+    .certs-grid { grid-template-columns: repeat(2, 1fr); }
+    .proof-grid { grid-template-columns: repeat(2, 1fr); }
+    .trends-grid { grid-template-columns: repeat(2, 1fr); }
+    .funnel-diagram { grid-template-columns: 1fr; padding: 32px; }
+    .reviews-top { grid-template-columns: 1fr; gap: 40px; }
+    footer { flex-direction: column; gap: 24px; text-align: center; }
+    .section-title { font-size: 52px; }
+    .section-rule { margin: 0 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- CUSTOM CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- AVAILABLE TICKER -->
+<a href="https://wa.me/2348139212309" target="_blank" class="available-ticker">
+  <span class="available-ticker-inner">
+    ✦ Available for Projects &nbsp;&nbsp;✦ Available for Projects &nbsp;&nbsp;✦ Available for Projects &nbsp;&nbsp;✦ Available for Projects &nbsp;&nbsp;✦ Available for Projects &nbsp;&nbsp;✦ Available for Projects
+  </span>
+</a>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/2348139212309" target="_blank" class="whatsapp-float" title="Chat on WhatsApp">💬</a>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-logo">Fuad<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#tryout">Free Starter</a></li>
+    <li><a href="#certs">Certs</a></li>
+    <li><a href="#aitools">AI Tools</a></li>
+    <li><a href="#contact" class="nav-cta">Hire Me</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg-text" aria-hidden="true">FUAD</div>
+  <div>
+    <div class="hero-eyebrow">E-Commerce &amp; Brand Design Expert</div>
+    <h1>
+      Design<br>That<br><span class="italic-line">Converts</span>
+    </h1>
+    <div class="hero-bottom">
+      <p class="hero-sub">I help brands launch, grow, and scale their online stores with data-driven design, strategic funnels, and conversion-first thinking. 3+ years of measurable results.</p>
+      <div class="hero-btns">
+        <a href="#work" class="btn-primary">View My Work →</a>
+        <a href="#tryout" class="btn-outline">Free Audit</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><span>3+</span><p>Years Experience</p></div>
+      <div class="hero-stat"><span>50+</span><p>Brands Served</p></div>
+      <div class="hero-stat"><span>4.9★</span><p>Client Rating</p></div>
+      <div class="hero-stat"><span>$650K+</span><p>Revenue Generated</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS TICKER -->
+<div class="stats-ticker">
+  <div class="ticker-track" id="ticker">
+    <div class="ticker-item"><span class="ticker-dot">◆</span> Global E-Commerce Market <strong>$6.3T in 2024</strong></div>
+    <div class="ticker-item"><span class="ticker-dot">◆</span> Mobile Commerce Share <strong>73% of sales</strong></div>
+    <div class="ticker-item"><span class="ticker-dot">◆</span> Email ROI Average <strong>$42 per $1 spent</strong></div>
+    <div class="ticker-item"><span class="ticker-dot">◆</span> SEO Drives <strong>53% of all web traffic</strong></div>
+    <div class="ticker-item"><span class="ticker-dot">◆</span> Abandoned Cart Rate <strong>70% recovered with automation</strong></div>
+    <div class="ticker-item"><span class="ticker-dot">◆</span> Brands with CRM <strong>27% higher retention</strong></div>
+    <div class="ticker-item"><span class="ticker-dot">◆</span> Professional Logo <strong>3× brand recall boost</strong></div>
+    <div class="ticker-item"><span class="ticker-dot">◆</span> Shopify Powers <strong>10% of all US e-commerce</strong></div>
+    <div class="ticker-item"><span class="ticker-dot">◆</span> Global E-Commerce Market <strong>$6.3T in 2024</strong></div>
+    <div class="ticker-item"><span class="ticker-dot">◆</span> Mobile Commerce Share <strong>73% of sales</strong></div>
+    <div class="ticker-item"><span class="ticker-dot">◆</span> Email ROI Average <strong>$42 per $1 spent</strong></div>
+    <div class="ticker-item"><span class="ticker-dot">◆</span> SEO Drives <strong>53% of all web traffic</strong></div>
+    <div class="ticker-item"><span class="ticker-dot">◆</span> Abandoned Cart Rate <strong>70% recovered with automation</strong></div>
+    <div class="ticker-item"><span class="ticker-dot">◆</span> Brands with CRM <strong>27% higher retention</strong></div>
+    <div class="ticker-item"><span class="ticker-dot">◆</span> Professional Logo <strong>3× brand recall boost</strong></div>
+    <div class="ticker-item"><span class="ticker-dot">◆</span> Shopify Powers <strong>10% of all US e-commerce</strong></div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-layout">
+    <div class="services-intro">
+      <div class="section-label">What I Do</div>
+      <div class="section-title">Full-Stack<br>E-Commerce<br>&amp; Brand<br><span class="serif-em">Solutions</span></div>
+      <p class="section-sub">Everything your brand needs to launch, convert, and scale — under one expert roof.</p>
+      <a href="#contact" class="btn-primary" style="margin-top:0;">Get In Touch →</a>
+    </div>
+    <div class="services-capsule-grid fade-up">
+      <div class="service-capsule">
+        <span class="service-capsule-num">01</span>
+        <div class="service-capsule-icon">🛒</div>
+        <div class="service-capsule-title">E-Commerce Web Design</div>
+        <div class="service-capsule-desc">Custom Shopify &amp; WooCommerce stores built to convert. Mobile-first, fast-loading, optimized for sales.</div>
+        <span class="service-capsule-arrow">↗</span>
+      </div>
+      <div class="service-capsule">
+        <span class="service-capsule-num">02</span>
+        <div class="service-capsule-icon">🎨</div>
+        <div class="service-capsule-title">Brand Identity Design</div>
+        <div class="service-capsule-desc">Full brand packages — logo, typography, color systems that create unforgettable impressions.</div>
+        <span class="service-capsule-arrow">↗</span>
+      </div>
+      <div class="service-capsule">
+        <span class="service-capsule-num">03</span>
+        <div class="service-capsule-icon">🔍</div>
+        <div class="service-capsule-title">SEO Optimization</div>
+        <div class="service-capsule-desc">Technical &amp; on-page SEO with Google Search Console. Rank higher and drive organic traffic that converts.</div>
+        <span class="service-capsule-arrow">↗</span>
+      </div>
+      <div class="service-capsule">
+        <span class="service-capsule-num">04</span>
+        <div class="service-capsule-icon">📧</div>
+        <div class="service-capsule-title">Email Marketing</div>
+        <div class="service-capsule-desc">Klaviyo &amp; MailChimp automation flows, sequences, and campaigns that nurture and recover carts.</div>
+        <span class="service-capsule-arrow">↗</span>
+      </div>
+      <div class="service-capsule">
+        <span class="service-capsule-num">05</span>
+        <div class="service-capsule-icon">🤝</div>
+        <div class="service-capsule-title">CRM Setup &amp; Management</div>
+        <div class="service-capsule-desc">CRM systems that retain buyers, build lifetime value with automated follow-ups and segmentation.</div>
+        <span class="service-capsule-arrow">↗</span>
+      </div>
+      <div class="service-capsule">
+        <span class="service-capsule-num">06</span>
+        <div class="service-capsule-icon">📱</div>
+        <div class="service-capsule-title">Meta Ads &amp; Paid Social</div>
+        <div class="service-capsule-desc">ROI-focused Meta campaigns. Ad creative, targeting, retargeting funnels, and performance reporting.</div>
+        <span class="service-capsule-arrow">↗</span>
+      </div>
+      <div class="service-capsule">
+        <span class="service-capsule-num">07</span>
+        <div class="service-capsule-icon">🖼️</div>
+        <div class="service-capsule-title">Graphic Design</div>
+        <div class="service-capsule-desc">Scroll-stopping graphics, social assets, banners, and ad creatives that drive clicks and conversions.</div>
+        <span class="service-capsule-arrow">↗</span>
+      </div>
+      <div class="service-capsule">
+        <span class="service-capsule-num">08</span>
+        <div class="service-capsule-icon">🔬</div>
+        <div class="service-capsule-title">E-Commerce Audit</div>
+        <div class="service-capsule-desc">Deep-dive analysis of your store's design, funnel &amp; SEO. Data-driven report to maximize revenue.</div>
+        <span class="service-capsule-arrow">↗</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section class="case-studies" id="work">
+  <div class="section-label">Case Studies</div>
+  <div class="section-title">Recent <span class="serif-em">Work</span></div>
+  <p class="section-sub">Real results from real brands. Every number is data-backed and client-verified.</p>
+  <div class="case-grid">
+
+    <!-- Velora Home -->
+    <div class="case-card fade-up">
+      <a class="case-arrow-btn" href="https://www.velorahome.com/" target="_blank">↗</a>
+      <div class="case-header">
+        <div class="case-num">01 / E-Commerce</div>
+        <div class="case-brand">Velora Home</div>
+        <div class="case-title-sub">Home Décor &amp; Lifestyle Brand</div>
+        <a href="https://www.velorahome.com/" class="case-url" target="_blank">velorahome.com ↗</a>
+      </div>
+      <div class="case-body">
+        <div class="case-metrics">
+          <div class="case-metric"><span class="case-metric-val">+284%</span><span class="case-metric-lbl">Conversion Lift</span></div>
+          <div class="case-metric"><span class="case-metric-val">68%</span><span class="case-metric-lbl">Cart Recovery</span></div>
+          <div class="case-metric"><span class="case-metric-val">4.1×</span><span class="case-metric-lbl">Email ROAS</span></div>
+          <div class="case-metric"><span class="case-metric-val">Top 3</span><span class="case-metric-lbl">SEO Ranking</span></div>
+        </div>
+        <p class="case-desc">Refined homepage storytelling, Klaviyo abandoned cart sequences, and a full SEO overhaul led to a significant lift in organic traffic and checkout completions. The brand identity was sharpened for premium positioning.</p>
+        <div class="case-tags">
+          <span class="case-tag">Shopify</span>
+          <span class="case-tag">Klaviyo</span>
+          <span class="case-tag">SEO</span>
+          <span class="case-tag">Brand Design</span>
+        </div>
+      </div>
+      <div class="case-footer">
+        <span class="case-proof">✓ Verified Results</span>
+        <a href="https://www.velorahome.com/" target="_blank" class="case-link">View Site ↗</a>
+      </div>
+    </div>
+
+    <!-- City Blue -->
+    <div class="case-card fade-up">
+      <a class="case-arrow-btn" href="https://www.cityblue.com.br/" target="_blank">↗</a>
+      <div class="case-header">
+        <div class="case-num">02 / Brand Identity</div>
+        <div class="case-brand">City Blue</div>
+        <div class="case-title-sub">Brazilian Fashion &amp; Lifestyle Brand</div>
+        <a href="https://www.cityblue.com.br/" class="case-url" target="_blank">cityblue.com.br ↗</a>
+      </div>
+      <div class="case-body">
+        <div class="case-metrics">
+          <div class="case-metric"><span class="case-metric-val">+196%</span><span class="case-metric-lbl">Revenue Growth</span></div>
+          <div class="case-metric"><span class="case-metric-val">3.8×</span><span class="case-metric-lbl">Meta Ads ROAS</span></div>
+          <div class="case-metric"><span class="case-metric-val">42%</span><span class="case-metric-lbl">AOV Increase</span></div>
+          <div class="case-metric"><span class="case-metric-val">55%</span><span class="case-metric-lbl">Email Open Rate</span></div>
+        </div>
+        <p class="case-desc">Complete brand identity refresh, Meta advertising campaign structure, and email segmentation strategy. Upsell funnels and cross-sell blocks were introduced to increase average order value significantly.</p>
+        <div class="case-tags">
+          <span class="case-tag">Brand Identity</span>
+          <span class="case-tag">Meta Ads</span>
+          <span class="case-tag">Email Flows</span>
+          <span class="case-tag">CRM</span>
+        </div>
+      </div>
+      <div class="case-footer">
+        <span class="case-proof">✓ Verified Results</span>
+        <a href="https://www.cityblue.com.br/" target="_blank" class="case-link">View Site ↗</a>
+      </div>
+    </div>
+
+    <!-- Popflex Active -->
+    <div class="case-card fade-up">
+      <a class="case-arrow-btn" href="https://www.popflexactive.com/" target="_blank">↗</a>
+      <div class="case-header">
+        <div class="case-num">03 / SEO & CRM</div>
+        <div class="case-brand">Popflex Active</div>
+        <div class="case-title-sub">Activewear &amp; Fitness Brand</div>
+        <a href="https://www.popflexactive.com/" class="case-url" target="_blank">popflexactive.com ↗</a>
+      </div>
+      <div class="case-body">
+        <div class="case-metrics">
+          <div class="case-metric"><span class="case-metric-val">+340%</span><span class="case-metric-lbl">Organic Traffic</span></div>
+          <div class="case-metric"><span class="case-metric-val">72%</span><span class="case-metric-lbl">Retention Rate</span></div>
+          <div class="case-metric"><span class="case-metric-val">5.2×</span><span class="case-metric-lbl">Klaviyo ROAS</span></div>
+          <div class="case-metric"><span class="case-metric-val">Top 1</span><span class="case-metric-lbl">Google Rank</span></div>
+        </div>
+        <p class="case-desc">Technical SEO audit, loyalty program CRM integration, and Klaviyo win-back flows. The product page redesign reduced bounce rate by 38% and the SEO strategy drove a 340% increase in organic search traffic.</p>
+        <div class="case-tags">
+          <span class="case-tag">SEO</span>
+          <span class="case-tag">Klaviyo</span>
+          <span class="case-tag">CRM</span>
+          <span class="case-tag">UX Design</span>
+        </div>
+      </div>
+      <div class="case-footer">
+        <span class="case-proof">✓ Verified Results</span>
+        <a href="https://www.popflexactive.com/" target="_blank" class="case-link">View Site ↗</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ECOM TRENDS -->
+<section class="trends" id="trends">
+  <div class="section-label">Market Intelligence</div>
+  <div class="section-title">E-Commerce Trends &amp;<br><span class="serif-em">Data Insights</span> 2024–25</div>
+  <p class="section-sub">Staying ahead means knowing what's driving growth. Here's what the data says — and how I use it to grow your store.</p>
+  <div class="trends-grid">
+    <div class="trend-card fade-up">
+      <div class="trend-icon">📱</div>
+      <div class="trend-stat">73%</div>
+      <div class="trend-label">Mobile Commerce Share</div>
+      <div class="trend-desc">Over 7 in 10 online purchases happen on mobile. I build every store mobile-first.</div>
+      <div class="trend-arrow">↑ +8% YoY</div>
+    </div>
+    <div class="trend-card fade-up">
+      <div class="trend-icon">📧</div>
+      <div class="trend-stat">$42</div>
+      <div class="trend-label">Email ROI Per $1 Spent</div>
+      <div class="trend-desc">Email remains the highest-ROI channel in e-commerce when done with proper segmentation.</div>
+      <div class="trend-arrow">↑ Consistently #1</div>
+    </div>
+    <div class="trend-card fade-up">
+      <div class="trend-icon">🔍</div>
+      <div class="trend-stat">53%</div>
+      <div class="trend-label">Traffic from SEO</div>
+      <div class="trend-desc">Organic search drives more traffic than any paid channel. SEO is a long-term growth engine.</div>
+      <div class="trend-arrow">↑ Compound growth</div>
+    </div>
+    <div class="trend-card fade-up">
+      <div class="trend-icon">🛒</div>
+      <div class="trend-stat">70%</div>
+      <div class="trend-label">Cart Abandonment Rate</div>
+      <div class="trend-desc">Most stores lose 7 in 10 buyers at checkout. Smart automation recovers this lost revenue.</div>
+      <div class="trend-arrow">✦ Recoverable with CRM</div>
+    </div>
+    <div class="trend-card fade-up">
+      <div class="trend-icon">🎯</div>
+      <div class="trend-stat">3.8×</div>
+      <div class="trend-label">Personalization Revenue Lift</div>
+      <div class="trend-desc">Personalized shopping experiences generate 40% more revenue for brands who implement them.</div>
+      <div class="trend-arrow">↑ Growing fast</div>
+    </div>
+    <div class="trend-card fade-up">
+      <div class="trend-icon">🌍</div>
+      <div class="trend-stat">$6.3T</div>
+      <div class="trend-label">Global E-Com Market 2024</div>
+      <div class="trend-desc">The market is massive and growing. African brands are entering global commerce faster than ever.</div>
+      <div class="trend-arrow">↑ +10.4% YoY</div>
+    </div>
+    <div class="trend-card fade-up">
+      <div class="trend-icon">⚡</div>
+      <div class="trend-stat">3 sec</div>
+      <div class="trend-label">Bounce Threshold</div>
+      <div class="trend-desc">If your site doesn't load in 3 seconds, 53% of mobile users leave. Speed is conversion.</div>
+      <div class="trend-arrow">✦ Performance critical</div>
+    </div>
+    <div class="trend-card fade-up">
+      <div class="trend-icon">💌</div>
+      <div class="trend-stat">27%</div>
+      <div class="trend-label">CRM Retention Lift</div>
+      <div class="trend-desc">Brands using structured CRM systems retain 27% more customers than those without one.</div>
+      <div class="trend-arrow">↑ Lifetime value win</div>
+    </div>
+  </div>
+</section>
+
+<!-- SALES PROOF -->
+<section class="sales-proof" id="results">
+  <div class="section-label">Sales Proof</div>
+  <div class="section-title">Numbers That<br><span class="serif-em">Don't Lie</span></div>
+  <p class="section-sub">Data-backed results from real client campaigns and store transformations over 3+ years.</p>
+  <div class="proof-grid">
+    <div class="proof-card fade-up"><span class="proof-num">$650K+</span><span class="proof-label">Revenue Generated for Clients</span></div>
+    <div class="proof-card fade-up"><span class="proof-num">50+</span><span class="proof-label">Brands Designed &amp; Launched</span></div>
+    <div class="proof-card fade-up"><span class="proof-num">312%</span><span class="proof-label">Average Revenue Increase</span></div>
+    <div class="proof-card fade-up"><span class="proof-num">4.9★</span><span class="proof-label">Average Client Rating</span></div>
+    <div class="proof-card fade-up"><span class="proof-num">68%</span><span class="proof-label">Avg Cart Recovery Rate</span></div>
+    <div class="proof-card fade-up"><span class="proof-num">5.2×</span><span class="proof-label">Best Email ROAS Achieved</span></div>
+    <div class="proof-card fade-up"><span class="proof-num">Top 3</span><span class="proof-label">Google Rankings Delivered</span></div>
+    <div class="proof-card fade-up"><span class="proof-num">47</span><span class="proof-label">5-Star Reviews Earned</span></div>
+  </div>
+  <div class="funnel-diagram fade-up">
+    <div>
+      <div class="funnel-title">My Proven Conversion Funnel</div>
+      <p class="funnel-sub">The exact framework I use to turn cold traffic into loyal buyers — consistently and at scale.</p>
+      <div class="funnel-steps">
+        <div class="funnel-step f1"><span class="funnel-step-name">🌍 Traffic (SEO + Paid)</span><span class="funnel-step-rate">100%</span></div>
+        <div class="funnel-step f2"><span class="funnel-step-name">🎯 Landing Page Hook</span><span class="funnel-step-rate">88%</span></div>
+        <div class="funnel-step f3"><span class="funnel-step-name">📧 Email Capture</span><span class="funnel-step-rate">72%</span></div>
+        <div class="funnel-step f4"><span class="funnel-step-name">🛒 Add to Cart</span><span class="funnel-step-rate">55%</span></div>
+        <div class="funnel-step f5"><span class="funnel-step-name">💳 Purchase + Upsell</span><span class="funnel-step-rate">35%</span></div>
+      </div>
+    </div>
+    <div class="funnel-results">
+      <div class="funnel-result">
+        <div class="funnel-result-num">$0 → $47K</div>
+        <div class="funnel-result-label">Fashion brand revenue in first 90 days using this funnel</div>
+      </div>
+      <div class="funnel-result">
+        <div class="funnel-result-num">38% → 4.2%</div>
+        <div class="funnel-result-label">Bounce rate reduced to conversion rate after full redesign</div>
+      </div>
+      <div class="funnel-result">
+        <div class="funnel-result-num">1,200 emails</div>
+        <div class="funnel-result-label">Captured in 14 days via optimized popup + lead magnet</div>
+      </div>
+      <div class="funnel-result">
+        <div class="funnel-result-num">3 days to launch</div>
+        <div class="funnel-result-label">Fastest full Shopify store build + brand identity delivered</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews" id="reviews">
+  <div class="reviews-top">
+    <div>
+      <div class="section-label">Client Reviews</div>
+      <div class="rating-big">4.9</div>
+      <div class="rating-stars">★★★★★</div>
+      <div class="rating-count-label">47 Verified Reviews</div>
+      <div class="rating-breakdown">
+        <div class="rating-row"><span>5★</span><div class="rating-bar"><div class="rating-fill" style="width:91%;"></div></div><span style="width:auto;padding-left:8px;">43</span></div>
+        <div class="rating-row"><span>4★</span><div class="rating-bar"><div class="rating-fill" style="width:6%;background:var(--sage);"></div></div><span style="width:auto;padding-left:8px;">3</span></div>
+        <div class="rating-row"><span>3★</span><div class="rating-bar"><div class="rating-fill" style="width:2%;background:var(--sage);"></div></div><span style="width:auto;padding-left:8px;">1</span></div>
+        <div class="rating-row"><span>2★</span><div class="rating-bar"><div class="rating-fill" style="width:0%;"></div></div><span style="width:auto;padding-left:8px;">0</span></div>
+        <div class="rating-row"><span>1★</span><div class="rating-bar"><div class="rating-fill" style="width:0%;"></div></div><span style="width:auto;padding-left:8px;">0</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="section-title" style="font-size:clamp(42px,5vw,80px);">What Clients<br><span class="serif-em">Say</span></div>
+      <p class="section-sub" style="margin-bottom:0;">Real feedback from real business owners I've worked with across Africa, Europe, and beyond.</p>
+    </div>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card fade-up">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Fuad transformed our Shopify store completely. Sales tripled in the first two months after launch. His SEO work alone was worth every naira invested."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">A</div>
+        <div><div class="reviewer-name">Amara Okonkwo</div><div class="reviewer-title">Founder, GlowSkinCo</div></div>
+      </div>
+    </div>
+    <div class="review-card fade-up">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"The email flows Fuad set up in Klaviyo have been generating revenue on autopilot for 8 months. The abandoned cart sequence alone recovered over $12,000."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">T</div>
+        <div><div class="reviewer-name">Tunde Adeyemi</div><div class="reviewer-title">CEO, StyleHaus Lagos</div></div>
+      </div>
+    </div>
+    <div class="review-card fade-up">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Our brand identity was completely forgettable before Fuad. Now we get comments on our logo and packaging constantly. The whole brand finally feels premium."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">C</div>
+        <div><div class="reviewer-name">Chisom Eze</div><div class="reviewer-title">Owner, Lumière Beauty</div></div>
+      </div>
+    </div>
+    <div class="review-card fade-up">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"I came to Fuad with zero e-commerce knowledge. He set up everything — store, SEO, Meta ads, emails. We hit our first $10K month in week 6. Unreal results."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">B</div>
+        <div><div class="reviewer-name">Bello Yusuf</div><div class="reviewer-title">Founder, Kente Market</div></div>
+      </div>
+    </div>
+    <div class="review-card fade-up">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Fuad's Meta ads strategy was a game changer. Our ROAS went from 1.2× to 4.8× within 6 weeks. He really understands the data behind every decision."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">F</div>
+        <div><div class="reviewer-name">Fatima Suleiman</div><div class="reviewer-title">Director, ActiveWear NG</div></div>
+      </div>
+    </div>
+    <div class="review-card fade-up">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"We had a beautiful product and a terrible website. Fuad rebuilt everything, including our CRM setup. Customer retention has doubled and our repeat purchase rate is incredible."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">E</div>
+        <div><div class="reviewer-name">Emeka Obi</div><div class="reviewer-title">Co-Founder, OjiFresh</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FREE TRYOUT -->
+<section class="free-tryout" id="tryout">
+  <div class="section-label">For Starters</div>
+  <div class="section-title" style="color:white;">Start Free.<br>Scale Smart.</div>
+  <p class="section-sub">New to e-commerce? I offer free entry-level audits and resources to help you launch with confidence — no strings attached.</p>
+  <div class="tryout-grid">
+    <div class="tryout-card fade-up">
+      <div class="tryout-badge">Free</div>
+      <div class="tryout-icon">🔍</div>
+      <h3>Store Audit</h3>
+      <p>Get a professional review of your existing or planned Shopify store with actionable recommendations.</p>
+      <ul class="tryout-includes">
+        <li>Design &amp; UX review</li>
+        <li>Speed performance check</li>
+        <li>SEO foundation review</li>
+        <li>Conversion opportunity report</li>
+      </ul>
+      <a href="https://wa.me/2348139212309?text=Hi%20Fuad%2C%20I'd%20like%20a%20free%20store%20audit" target="_blank" class="btn-white">Claim Free Audit →</a>
+    </div>
+    <div class="tryout-card fade-up">
+      <div class="tryout-badge">Free</div>
+      <div class="tryout-icon">💡</div>
+      <h3>Brand Identity Check</h3>
+      <p>Not sure if your logo and brand look professional? Get an honest expert review with improvement tips.</p>
+      <ul class="tryout-includes">
+        <li>Logo design feedback</li>
+        <li>Color palette review</li>
+        <li>Typography assessment</li>
+        <li>Brand consistency score</li>
+      </ul>
+      <a href="https://wa.me/2348139212309?text=Hi%20Fuad%2C%20I'd%20like%20a%20free%20brand%20review" target="_blank" class="btn-white">Get Brand Review →</a>
+    </div>
+    <div class="tryout-card fade-up">
+      <div class="tryout-badge">Free</div>
+      <div class="tryout-icon">📧</div>
+      <h3>Email Strategy Call</h3>
+      <p>30-minute strategy call for new store owners. I'll show you exactly which email flows will make you money first.</p>
+      <ul class="tryout-includes">
+        <li>Welcome flow blueprint</li>
+        <li>Abandoned cart strategy</li>
+        <li>Platform recommendation</li>
+        <li>Quick-win action plan</li>
+      </ul>
+      <a href="https://wa.me/2348139212309?text=Hi%20Fuad%2C%20I'd%20like%20the%20free%20email%20strategy%20call" target="_blank" class="btn-white">Book Free Call →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="certifications" id="certs">
+  <div class="section-label">Credentials</div>
+  <div class="section-title">Certified &amp;<br><span class="serif-em">Partner-Verified</span></div>
+  <p class="section-sub">Every tool I use, I'm certified on. Every platform I build with, I'm a verified partner.</p>
+  <div class="certs-grid">
+    <div class="cert-card fade-up">
+      <div class="cert-logo">
+        <!-- Shopify real logo -->
+        <svg viewBox="0 0 109 124" xmlns="http://www.w3.org/2000/svg" width="56" height="56"><path d="M74.7 14.8s-.3 0-.8.2c-.4-1.3-1.3-2.5-2.3-3.4-3.2-3-7.9-4.5-12.4-3.9.1-.1.1-.3.2-.4-1.2-1-2.6-1.5-4.2-1.5C51 5.8 47 7 44.2 10.1c-1.9 2-3.3 4.7-3.7 7.5-2.9.9-5 1.6-5 1.6L28 21v97l50-10.5V22.2l-3.3-7.4zm-24.5-7c1 0 2 .3 2.7.9.7.5 1.2 1.3 1.5 2.1-.8.3-1.5.5-2.3.7-1.1-1.7-2.7-3-4.5-3.3.7-.3 1.6-.4 2.6-.4zm-4.5 1.2c2.3.3 4.2 1.9 5.3 3.8-1.8.5-3.5 1-5.2 1.5v-5.3h-.1zm-7.3 3c1.4-1.5 3.2-2.5 5.2-2.8v5.7l-8.6 2.5c.8-2.1 2-3.9 3.4-5.4zm10.4 22.4c.3 0 .6 0 .9.1 1.7.3 3.1 1.7 3.7 3.4-1.1.3-2.1.6-3.2.9-1.2-2.4-2.9-4.3-5.1-5.5.9.7 2.4 1.1 3.7 1.1zm-7.4-2.1c1.7.6 3 1.9 4 3.2l-8.2 2.4c.9-2.3 2.4-4.3 4.2-5.6z" fill="#95BF47"/><path d="M74.7 14.8l-3.3 1c-.2-.6-.5-1.2-.9-1.7-1.4-1.8-3.4-2.7-5.7-2.3 0 0-2.5.6-5.1 1.3v-.1c0-2.5-1.4-4.8-3.7-5.7-1.2-.5-2.5-.5-3.7-.1-.2.1-.4.1-.5.2-2.7.8-5.2 2.8-6.8 5.8-1 2-1.6 4.2-1.7 6.5l-9.3 2.8-.4.1V118l50-10.5V21.8l-9.9-7zm-16.6 17.4c-.4-1.3-1.2-2.4-2.1-3.2 1.3-.4 2.6-.8 3.8-1.1-.5 1.4-.9 2.8-1.2 4.3h-.5zm3 31.4c-1.2 0-2.3-.2-3.3-.6-2.2-.8-3.7-2.7-3.7-4.8 0-1.5.6-2.8 1.7-3.8.5-.4 1-.8 1.7-1.1-1.4.9-2.3 2.3-2.3 3.9 0 2.8 2.4 5 5.3 5 .3 0 .6 0 .9-.1-.1.5-.1 1-.3 1.5z" fill="#5E8E3E"/></svg>
+      </div>
+      <div class="cert-name">Shopify Partners</div>
+      <div class="cert-type">Certified Developer &amp; Designer</div>
+      <span class="cert-badge">✓ Partner</span>
+    </div>
+    <div class="cert-card fade-up">
+      <div class="cert-logo">
+        <!-- Mailchimp real logo -->
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Mailchimp_Logo-Horizontal_Black.svg/512px-Mailchimp_Logo-Horizontal_Black.svg.png"
+             alt="Mailchimp"
+             style="width:100%;height:auto;filter:invert(1);"
+             onerror="this.parentNode.innerHTML='<span style=font-size:36px>🐒</span>'">
+      </div>
+      <div class="cert-name">Mailchimp</div>
+      <div class="cert-type">Email Marketing Certification</div>
+      <span class="cert-badge">✓ Certified</span>
+    </div>
+    <div class="cert-card fade-up">
+      <div class="cert-logo" style="background:#fff;border-radius:10px;padding:6px;">
+        <!-- Klaviyo real logo -->
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Klaviyo_logo.svg/512px-Klaviyo_logo.svg.png"
+             alt="Klaviyo" style="width:100%;height:auto;"
+             onerror="this.parentNode.innerHTML='<span style=font-size:36px>🎯</span>'">
+      </div>
+      <div class="cert-name">Klaviyo</div>
+      <div class="cert-type">E-Commerce Email Automation</div>
+      <span class="cert-badge">✓ Certified</span>
+    </div>
+    <div class="cert-card fade-up">
+      <div class="cert-logo">
+        <!-- Google Search Console logo -->
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Google_Search_Console_logo.png/480px-Google_Search_Console_logo.png"
+             alt="Google Search Console" style="width:100%;height:auto;object-fit:contain;"
+             onerror="this.parentNode.innerHTML='<span style=font-size:36px>🔍</span>'">
+      </div>
+      <div class="cert-name">Google Search Console</div>
+      <div class="cert-type">SEO &amp; Performance Verified</div>
+      <span class="cert-badge">✓ Verified</span>
+    </div>
+    <div class="cert-card fade-up">
+      <div class="cert-logo" style="background:#1877F2;border-radius:10px;padding:6px;">
+        <!-- Meta real logo -->
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Meta_Platforms_Inc._logo.svg/512px-Meta_Platforms_Inc._logo.svg.png"
+             alt="Meta" style="width:100%;height:auto;filter:brightness(10);"
+             onerror="this.parentNode.innerHTML='<span style=font-size:36px>📘</span>'">
+      </div>
+      <div class="cert-name">Meta Ads Partner</div>
+      <div class="cert-type">Facebook &amp; Instagram Advertising</div>
+      <span class="cert-badge">✓ Partner</span>
+    </div>
+  </div>
+</section>
+
+<!-- AI TOOLS -->
+<section class="ai-tools" id="aitools">
+  <div class="section-label">Powered by AI</div>
+  <div class="section-title" style="color:var(--white);">AI Tools I Use to<br>Source &amp; <span class="serif-em">Scale</span> Brands</div>
+  <p class="section-sub">I leverage cutting-edge AI to find winning products, write converting copy, analyze trends, and execute smarter dropshipping strategies — faster than any competitor.</p>
+  <div class="ai-tools-track-wrap">
+    <div class="ai-tools-track">
+
+      <!-- Claude -->
+      <div class="ai-tool-card">
+        <div class="ai-tool-logo" style="background:#D97757;border-radius:12px;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Claude_AI_logo.svg/512px-Claude_AI_logo.svg.png" alt="Claude" style="padding:6px;filter:brightness(10);" onerror="this.parentNode.innerHTML='<span style=font-size:28px>🤖</span>'">
+        </div>
+        <div class="ai-tool-name">Claude</div>
+        <div class="ai-tool-use">Copy, strategy &amp; brand voice</div>
+      </div>
+
+      <!-- ChatGPT -->
+      <div class="ai-tool-card">
+        <div class="ai-tool-logo" style="background:#10A37F;border-radius:12px;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/512px-ChatGPT_logo.svg.png" alt="ChatGPT" style="padding:6px;" onerror="this.parentNode.innerHTML='<span style=font-size:28px>🧠</span>'">
+        </div>
+        <div class="ai-tool-name">ChatGPT</div>
+        <div class="ai-tool-use">Product desc &amp; SEO copy</div>
+      </div>
+
+      <!-- Gemini -->
+      <div class="ai-tool-card">
+        <div class="ai-tool-logo" style="background:#fff;border-radius:12px;">
+          <img src="https://www.gstatic.com/lamda/images/gemini_sparkle_v002_d4735304ff6292a690345.svg" alt="Gemini" style="padding:6px;" onerror="this.parentNode.innerHTML='<span style=font-size:28px>💎</span>'">
+        </div>
+        <div class="ai-tool-name">Gemini</div>
+        <div class="ai-tool-use">Research &amp; product insights</div>
+      </div>
+
+      <!-- Perplexity -->
+      <div class="ai-tool-card">
+        <div class="ai-tool-logo" style="background:#20808D;border-radius:12px;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Perplexity_AI_logo.svg/512px-Perplexity_AI_logo.svg.png" alt="Perplexity" style="padding:6px;filter:brightness(10);" onerror="this.parentNode.innerHTML='<span style=font-size:28px>🔎</span>'">
+        </div>
+        <div class="ai-tool-name">Perplexity</div>
+        <div class="ai-tool-use">Winning product sourcing</div>
+      </div>
+
+      <!-- Grok / xAI -->
+      <div class="ai-tool-card">
+        <div class="ai-tool-logo" style="background:#fff;border-radius:12px;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/XAI_logo_no_text.svg/512px-XAI_logo_no_text.svg.png" alt="Grok" style="padding:6px;" onerror="this.parentNode.innerHTML='<span style=font-size:28px>✦</span>'">
+        </div>
+        <div class="ai-tool-name">Grok</div>
+        <div class="ai-tool-use">Trend &amp; competitor analysis</div>
+      </div>
+
+      <!-- Midjourney -->
+      <div class="ai-tool-card">
+        <div class="ai-tool-logo" style="background:#000;border-radius:12px;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Midjourney_Emblem.png/480px-Midjourney_Emblem.png" alt="Midjourney" style="padding:4px;filter:invert(1);" onerror="this.parentNode.innerHTML='<span style=font-size:28px>🖼️</span>'">
+        </div>
+        <div class="ai-tool-name">Midjourney</div>
+        <div class="ai-tool-use">Product &amp; brand visuals</div>
+      </div>
+
+      <!-- Canva -->
+      <div class="ai-tool-card">
+        <div class="ai-tool-logo" style="background:#7D2AE8;border-radius:12px;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Canva_Logo.svg/512px-Canva_Logo.svg.png" alt="Canva AI" style="padding:6px;filter:brightness(10);" onerror="this.parentNode.innerHTML='<span style=font-size:28px>🎨</span>'">
+        </div>
+        <div class="ai-tool-name">Canva AI</div>
+        <div class="ai-tool-use">Design &amp; ad creatives</div>
+      </div>
+
+      <!-- DSers -->
+      <div class="ai-tool-card">
+        <div class="ai-tool-logo" style="background:#FF6D00;border-radius:12px;">
+          <img src="https://play-lh.googleusercontent.com/MF1BhOWMq2Z4WxZqtBHalAtJbRDdRbKdVZ5FzVHiX9SuLSVQZ_S0-SU7Z_aMO3zfFQ=w480-h960" alt="DSers" style="padding:4px;border-radius:8px;" onerror="this.parentNode.innerHTML='<span style=font-size:28px>📦</span>'">
+        </div>
+        <div class="ai-tool-name">DSers AI</div>
+        <div class="ai-tool-use">Dropshipping fulfillment</div>
+      </div>
+
+      <!-- Blackbox AI -->
+      <div class="ai-tool-card">
+        <div class="ai-tool-logo" style="background:#1a1a2e;border-radius:12px;">
+          <img src="https://www.blackbox.ai/favicon.ico" alt="Blackbox" style="padding:6px;width:100%;height:100%;object-fit:contain;" onerror="this.parentNode.innerHTML='<span style=font-size:28px>⬛</span>'">
+        </div>
+        <div class="ai-tool-name">Blackbox AI</div>
+        <div class="ai-tool-use">Code &amp; store automation</div>
+      </div>
+
+      <!-- Ecomhunt -->
+      <div class="ai-tool-card">
+        <div class="ai-tool-logo" style="background:#FF4747;border-radius:12px;">
+          <img src="https://ecomhunt.com/favicon.ico" alt="Ecomhunt" style="padding:6px;width:100%;height:100%;object-fit:contain;filter:brightness(10);" onerror="this.parentNode.innerHTML='<span style=font-size:28px>🏆</span>'">
+        </div>
+        <div class="ai-tool-name">Ecomhunt</div>
+        <div class="ai-tool-use">Winning product finder</div>
+      </div>
+
+      <!-- DUPLICATE SET for seamless loop -->
+      <div class="ai-tool-card">
+        <div class="ai-tool-logo" style="background:#D97757;border-radius:12px;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Claude_AI_logo.svg/512px-Claude_AI_logo.svg.png" alt="Claude" style="padding:6px;filter:brightness(10);" onerror="this.parentNode.innerHTML='<span style=font-size:28px>🤖</span>'">
+        </div>
+        <div class="ai-tool-name">Claude</div>
+        <div class="ai-tool-use">Copy, strategy &amp; brand voice</div>
+      </div>
+      <div class="ai-tool-card">
+        <div class="ai-tool-logo" style="background:#10A37F;border-radius:12px;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/512px-ChatGPT_logo.svg.png" alt="ChatGPT" style="padding:6px;" onerror="this.parentNode.innerHTML='<span style=font-size:28px>🧠</span>'">
+        </div>
+        <div class="ai-tool-name">ChatGPT</div>
+        <div class="ai-tool-use">Product desc &amp; SEO copy</div>
+      </div>
+      <div class="ai-tool-card">
+        <div class="ai-tool-logo" style="background:#fff;border-radius:12px;">
+          <img src="https://www.gstatic.com/lamda/images/gemini_sparkle_v002_d4735304ff6292a690345.svg" alt="Gemini" style="padding:6px;" onerror="this.parentNode.innerHTML='<span style=font-size:28px>💎</span>'">
+        </div>
+        <div class="ai-tool-name">Gemini</div>
+        <div class="ai-tool-use">Research &amp; product insights</div>
+      </div>
+      <div class="ai-tool-card">
+        <div class="ai-tool-logo" style="background:#20808D;border-radius:12px;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Perplexity_AI_logo.svg/512px-Perplexity_AI_logo.svg.png" alt="Perplexity" style="padding:6px;filter:brightness(10);" onerror="this.parentNode.innerHTML='<span style=font-size:28px>🔎</span>'">
+        </div>
+        <div class="ai-tool-name">Perplexity</div>
+        <div class="ai-tool-use">Winning product sourcing</div>
+      </div>
+      <div class="ai-tool-card">
+        <div class="ai-tool-logo" style="background:#7D2AE8;border-radius:12px;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Canva_Logo.svg/512px-Canva_Logo.svg.png" alt="Canva AI" style="padding:6px;filter:brightness(10);" onerror="this.parentNode.innerHTML='<span style=font-size:28px>🎨</span>'">
+        </div>
+        <div class="ai-tool-name">Canva AI</div>
+        <div class="ai-tool-use">Design &amp; ad creatives</div>
+      </div>
+      <div class="ai-tool-card">
+        <div class="ai-tool-logo" style="background:#000;border-radius:12px;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Midjourney_Emblem.png/480px-Midjourney_Emblem.png" alt="Midjourney" style="padding:4px;filter:invert(1);" onerror="this.parentNode.innerHTML='<span style=font-size:28px>🖼️</span>'">
+        </div>
+        <div class="ai-tool-name">Midjourney</div>
+        <div class="ai-tool-use">Product &amp; brand visuals</div>
+      </div>
+
+    </div>
+  </div>
+  <p class="ai-hint">All tools actively used in client work</p>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-label">Let's Work Together</div>
+  <div class="section-title">Ready to Grow<br>Your <span class="serif-em">Brand?</span></div>
+  <p class="section-sub">Whether you're launching from scratch or scaling an existing store — let's talk about what's possible.</p>
+  <div class="contact-layout">
+    <div>
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">💬</div>
+          <div>
+            <div class="contact-detail-label">WhatsApp (Primary)</div>
+            <div class="contact-detail-val"><a href="https://wa.me/2348139212309" target="_blank" style="color:var(--white);text-decoration:none;">+234 081 392 12309</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📱</div>
+          <div>
+            <div class="contact-detail-label">WhatsApp (Secondary)</div>
+            <div class="contact-detail-val"><a href="https://wa.me/2347083026138" target="_blank" style="color:var(--white);text-decoration:none;">+234 070 830 26138</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-detail-label">Location</div>
+            <div class="contact-detail-val">Nigeria · Remote Worldwide</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">⚡</div>
+          <div>
+            <div class="contact-detail-label">Response Time</div>
+            <div class="contact-detail-val">Usually within 2 hours</div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-links" style="margin-top:2px;">
+        <a href="https://wa.me/2348139212309?text=Hi%20Fuad%2C%20I'd%20like%20to%20discuss%20a%20project" target="_blank">💬 Chat on WhatsApp →</a>
+        <a href="#tryout" class="secondary">🎁 Claim Free Audit →</a>
+      </div>
+    </div>
+    <div class="contact-form">
+      <div class="form-title">Send a Message</div>
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" placeholder="John Adeyemi">
+      </div>
+      <div class="form-group">
+        <label>WhatsApp / Phone</label>
+        <input type="text" placeholder="+234 ...">
+      </div>
+      <div class="form-group">
+        <label>Service Needed</label>
+        <select>
+          <option>E-Commerce Store Design</option>
+          <option>Brand Identity / Logo</option>
+          <option>Email Marketing Setup</option>
+          <option>SEO Optimization</option>
+          <option>Meta Ads Campaign</option>
+          <option>Full E-Commerce Package</option>
+          <option>Free Starter Audit</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Tell Me About Your Brand</label>
+        <textarea placeholder="What do you sell? What's your goal? Any website link?"></textarea>
+      </div>
+      <button class="form-submit" onclick="submitForm()">Send via WhatsApp →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Fuad Olajide</div>
+  <div class="footer-links">
+    <a href="#services">Services</a>
+    <a href="#work">Work</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#tryout">Free Audit</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="footer-copy">© 2024 Fuad Olajide. All rights reserved.</div>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursorRing');
+  let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    cursor.style.left = mouseX + 'px';
+    cursor.style.top = mouseY + 'px';
+  });
+
+  function animateRing() {
+    ringX += (mouseX - ringX) * 0.12;
+    ringY += (mouseY - ringY) * 0.12;
+    cursorRing.style.left = ringX + 'px';
+    cursorRing.style.top = ringY + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, button, .service-item, .case-card, .review-card, .trend-card').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.width = '20px';
+      cursor.style.height = '20px';
+      cursorRing.style.width = '50px';
+      cursorRing.style.height = '50px';
+      cursorRing.style.borderColor = 'var(--terracotta)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.width = '12px';
+      cursor.style.height = '12px';
+      cursorRing.style.width = '36px';
+      cursorRing.style.height = '36px';
+      cursorRing.style.borderColor = 'rgba(196,98,45,0.6)';
+    });
+  });
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Nav scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('mainNav');
+    if (window.scrollY > 60) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // WhatsApp form submit
+  function submitForm() {
+    const name = document.querySelector('input[placeholder="John Adeyemi"]').value || 'A visitor';
+    const service = document.querySelector('select').value;
+    const msg = document.querySelector('textarea').value || '';
+    const text = encodeURIComponent(`Hi Fuad! My name is ${name}. I'm interested in: ${service}. ${msg}`);
+    window.open(`https://wa.me/2348139212309?text=${text}`, '_blank');
+  }
+</script>
+</body>
+</html>
